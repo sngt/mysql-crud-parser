@@ -39,7 +39,6 @@ class Crud {
         });
         this.statements = result;
     }
-
 }
 
 module.exports = {

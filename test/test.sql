@@ -16,4 +16,6 @@ REPLACE INTO `user` (id, `name`, `password`) VALUES (6, 'hannibal', 'fc2921d9057
 SELECT * FROM `user` WHERE id = 3;
 SELECT * FROM `user` WHERE id=4;
 
-SOURCE /path/to/source.sql;
+SOURCE ./_source.sql;
+
+SELECT * FROM `user` WHERE id=5;

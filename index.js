@@ -3,21 +3,11 @@
 const {Statement, StatementType} = require('./lib/statement');
 const {Option, DelimiterType, CaseType, LiteralQuoteType, SchemaQuoteType} = require('./lib/option');
 
-class CrudParser {
+class Crud {
     constructor(sql) {
-        this.origin = (typeof sql === 'string') && sql || '';
-    }
-
-    parse() {
-        return new SqlHolder(Statement.resolve(this.origin));
-    }
-}
-
-class SqlHolder {
-    constructor(statements) {
         this.breakChar = '\n';
         this.option = new Option();
-        this.statements = statements;
+        this.statements = Statement.resolve(sql || '');
     }
 
     toString() {
@@ -28,10 +18,32 @@ class SqlHolder {
             return statement.toString(this.option) + this.breakChar;
         }).join('');
     }
+
+    expandSource() {
+        const result = [];
+        this.statements.forEach((statement) => {
+            if (statement.type !== StatementType.SOURCE) {
+                result.push(statement);
+                return;
+            }
+
+            const expanded = statement.expand();
+            if (expanded === statement) {
+                result.push(statement);
+                return;
+            }
+
+            expanded.forEach((infile) => {
+                result.push(infile);
+            });
+        });
+        this.statements = result;
+    }
+
 }
 
 module.exports = {
-    CrudParser,
+    Crud,
     StatementType,
     DelimiterType,
     CaseType,

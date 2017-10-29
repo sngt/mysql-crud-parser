@@ -9,5 +9,7 @@ fs.readFile('./test.sql', 'utf8', function (err, text) {
         throw err;
     }
     const result = new CrudParser(text).parse();
-    console.log(JSON.stringify(result));
+    result.statements.forEach((statement) => {
+        console.log(statement.toString());
+    });
 });

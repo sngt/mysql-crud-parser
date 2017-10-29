@@ -22,8 +22,11 @@ class SqlHolder {
 
     toString() {
         return this.statements.map((statement) => {
-            return statement.toString(this.option);
-        }).join(this.breakChar);
+            if (typeof statement === 'string') {
+                return statement;
+            }
+            return statement.toString(this.option) + this.breakChar;
+        }).join('');
     }
 }
 

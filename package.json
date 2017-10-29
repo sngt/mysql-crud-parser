@@ -1,0 +1,30 @@
+{
+  "name": "mysql-crud-parser",
+  "version": "1.0.0",
+  "description": "SQL query parser for MySQL syntax.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test.index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sngt/mysql-crud-parser.git"
+  },
+  "keywords": [
+    "MySQL",
+    "Parser",
+    "Tokenize",
+    "Comment",
+    "SELECT",
+    "INSERT",
+    "DELETE",
+    "UPDATE",
+    "SOURCE"
+  ],
+  "author": "toyoshima_shingo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sngt/mysql-crud-parser/issues"
+  },
+  "homepage": "https://github.com/sngt/mysql-crud-parser#readme"
+}

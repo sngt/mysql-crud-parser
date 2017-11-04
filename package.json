@@ -1,6 +1,6 @@
 {
   "name": "mysql-crud-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "SQL query parser for MySQL syntax.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "keywords": [
     "MySQL",
     "Parser",
-    "Tokenize",
+    "Builder",
     "Comment",
     "SELECT",
     "INSERT",

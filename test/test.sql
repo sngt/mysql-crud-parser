@@ -11,7 +11,7 @@ INSERT INTO `user` (id, `name`, `password`) VALUE (4, 'hasdrubal', 'c1572d05424d
 INSERT INTO `user` (id, `name`, `password`) VALUES
 (5, 'mago', '3afc79b597f88a72528e864cf81856d2'),
 (6, 'hannibal', '3afc79b597f88a72528e864cf81856d2');
-REPLACE INTO `user` (id, `name`, `password`) VALUES (6, 'hannibal', 'fc2921d9057ac44e549efaf0048b2512');
+REPLACE INTO `user` (id, `name`, `password`, created_at, updated_at) VALUES (6, 'hannibal', 'fc2921d9057ac44e549efaf0048b2512', NOW(), NOW());
 
 SELECT * FROM `user` WHERE id = 3;
 SELECT * FROM `user` WHERE id=4;

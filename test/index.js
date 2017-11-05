@@ -4,6 +4,12 @@
 const fs = require('fs');
 const {Crud, StatementType} = require('../index.js');
 
+const assert = (isSuccess, errorMessage) => {
+    if (isSuccess !== true) {
+        throw Error(errorMessage);
+    }
+};
+
 fs.readFile('./test.sql', 'utf8', function (err, text) {
     if (err) {
         throw err;
@@ -19,4 +25,10 @@ fs.readFile('./test.sql', 'utf8', function (err, text) {
             console.log('//------------------------------ infile --------------------------------');
         }
     });
+
+    (() => {
+        const crud = new Crud('SELECT val, COUNT(1) FROM (SELECT COUNT(1) AS val FROM tbl GROUP BY `type` IN(1,2,3)) tmp WHERE id IN (1,2,3,4);');
+        // assert(true);
+        console.log(crud.toString());
+    })();
 });

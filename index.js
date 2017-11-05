@@ -1,7 +1,7 @@
 'use strict';
 
 const {Statement, StatementType} = require('./lib/statement');
-const {Option, DelimiterType, CaseType, LiteralQuoteType, SchemaQuoteType} = require('./lib/option');
+const {Option, CaseType, LiteralQuoteType, SchemaQuoteType} = require('./lib/option');
 
 class Crud {
     constructor(sql) {
@@ -44,7 +44,6 @@ class Crud {
 module.exports = {
     Crud,
     StatementType,
-    DelimiterType,
     CaseType,
     LiteralQuoteType,
     SchemaQuoteType

@@ -10,7 +10,7 @@ INSERT INTO `user` VALUES (3, 'hamilcar', 'a722c63db8ec8625af6cf71cb8c2d939');
 INSERT INTO `user` (id, `name`, `password`) VALUE (4, 'hasdrubal', 'c1572d05424d0ecb2a65ec6a82aeacbf');
 INSERT INTO `user` (id, `name`, `password`) VALUES
 (5, 'mago', '3afc79b597f88a72528e864cf81856d2'),
-(6, 'hannibal', '3afc79b597f88a72528e864cf81856d2');
+(6, 'hannibal', '3afc79b597f88a72528e864cf81''856d2\'''');
 REPLACE INTO `user` (id, `name`, `password`, created_at, updated_at) VALUES (6, 'hannibal', 'fc2921d9057ac44e549efaf0048b2512', NOW(), NOW());
 
 SELECT * FROM `user` WHERE id = 3;

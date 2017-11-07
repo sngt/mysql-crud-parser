@@ -5,7 +5,6 @@ const {Option, CaseType, LiteralQuoteType, SchemaQuoteType} = require('./lib/opt
 
 class Crud {
     constructor(sql) {
-        this.breakChar = '\n';
         this.option = new Option();
         this.statements = Statement.resolve(sql || '');
     }
@@ -15,8 +14,8 @@ class Crud {
             if (typeof statement === 'string') {
                 return statement;
             }
-            return statement.toString(this.option) + this.breakChar;
-        }).join('');
+            return statement.toString(this.option) + this.option.breakChar;
+        }, this).join('');
     }
 
     expandSource() {

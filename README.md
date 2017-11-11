@@ -3,7 +3,7 @@ SQL parser for MySQL Syntax.
 
 ## Summary
 * It supports CRUD (`INSERT`,`SELECT`,`UPDATE`,`DELETE`) statements.
-* It can read external file via `SOURCE` statements.
+* It can read external files via `SOURCE` statements.
 
 ## Installation
 ```
@@ -163,26 +163,26 @@ __↓ ↓__
 The `option` property has some optional settings about behaviors of `toString` function.
 * `case`  
 default: `UPPER` (| `LOWER` | `PASCAL`)  
-which case(upper or lower) is to be used for SQL keywords.
+The letter case for SQL keywords.
 
 * `literalQuote`  
 default: `INACTION` (| `ALWAYS` | `NON_NUMERIC`)  
-when to quote literals.
+When to quote literals.
 
 * `schemaQuote`  
 default: `INACTION` (| `ALWAYS` | `RESERVED_WORD`)  
-when to quote schema expressions.
+When to quote schema expressions.
 
 * `breakChar`  
 default: `\n`  
-breaking character for plural line statements such as bulk insert ones.
+The breaking character for plural line statements such as bulk insert ones.
 
 * `selectExpressionSpacer`  
 default: a white space  
-spacing character for align column names or expressions in `SELECT` clause.
+The spacing character for align column names or expressions in `SELECT` clause.
 * `inClauseSpacer`  
 default: empty string  
-spacing character for align values for `IN` clause in `WHERE` clause.
+The spacing character for align arguments of `IN` operator.
 
 Default
 ```

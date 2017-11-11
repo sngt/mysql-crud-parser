@@ -10,6 +10,10 @@ const assert = (isSuccess, errorMessage) => {
     }
 };
 
+const assertEquals = (expected, actual) => {
+    assert(expected === actual, `"${actual}" does not equal "${expected}"`);
+};
+
 fs.readFile('./test.sql', 'utf8', function (err, text) {
     if (err) {
         throw err;
@@ -25,10 +29,10 @@ fs.readFile('./test.sql', 'utf8', function (err, text) {
             console.log('//------------------------------ infile --------------------------------');
         }
     });
-
-    (() => {
-        const crud = new Crud('SELECT val, COUNT(1) FROM (SELECT COUNT(1) AS val FROM tbl GROUP BY `type` IN(1,2,3)) tmp WHERE id IN (1,2,3,4);');
-        // assert(true);
-        console.log(crud.toString());
-    })();
 });
+
+(() => {
+    const SQL = 'SELECT `val`, COUNT(1) FROM (SELECT COUNT(1) AS `val` FROM `tbl` GROUP BY `type` IN(1,2,3)) `tmp` WHERE `id` IN (1,2,3,4);';
+    const crud = new Crud(SQL);
+    assertEquals(SQL, crud.toString());
+})();

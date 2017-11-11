@@ -30,10 +30,12 @@ __↓ ↓__
 ```
 {
   "option": {
-    "breakChar": "\n",
     "case": "UPPER",
-    "literalQuote": "ALWAYS",
-    "schemaQuote": "ALWAYS"
+    "literalQuote": "INACTION",
+    "schemaQuote": "INACTION",
+    "breakChar": "\n",
+    "selectExpressionSpacer": " ",
+    "inClauseSpacer": ""
   },
   "statements": [
     {
@@ -57,10 +59,14 @@ __↓ ↓__
       "type": "SELECT",
       "terminator": "\\G",
       "cols": [
-        "*"
+        {
+          "prefixes": [],
+          "value": "*"
+        }
       ],
       "table": "`tbl_user`",
       "where": {
+        "clauseName": "WHERE",
         "conditions": [
           {
             "col": "id",
@@ -78,6 +84,7 @@ __↓ ↓__
         "`password`": "'eeff5809b250d691acf3a8ff8f210bd9'"
       },
       "where": {
+        "clauseName": "WHERE",
         "conditions": [
           {
             "col": "id",
@@ -92,6 +99,7 @@ __↓ ↓__
       "terminator": ";",
       "table": "`tbl_user`",
       "where": {
+        "clauseName": "WHERE",
         "conditions": [
           {
             "col": "`id`",
@@ -147,6 +155,59 @@ __↓ ↓__
   Select {
     type: 'SELECT',
     terminator: ';',
-    cols: [ 'COUNT(*)' ],
+    cols: [ [Object] ],
     table: '`item`' } ]
+```
+
+## Options
+The `option` property has some optional settings about behaviors of `toString` function.
+* `case`  
+default: `UPPER` (| `LOWER` | `PASCAL`)  
+which case(upper or lower) is to be used for SQL keywords.
+
+* `literalQuote`  
+default: `INACTION` (| `ALWAYS` | `NON_NUMERIC`)  
+when to quote literals.
+
+* `schemaQuote`  
+default: `INACTION` (| `ALWAYS` | `RESERVED_WORD`)  
+when to quote schema expressions.
+
+* `breakChar`  
+default: `\n`  
+breaking character for plural line statements such as bulk insert ones.
+
+* `selectExpressionSpacer`  
+default: a white space  
+spacing character for align column names or expressions in `SELECT` clause.
+* `inClauseSpacer`  
+default: empty string  
+spacing character for align values for `IN` clause in `WHERE` clause.
+
+Default
+```
+var crud = new Crud('SELECT id, name, `order` FROM tbl WHERE id IN (1,2,3)');
+console.log(crud.toString());
+```
+__↓ ↓__
+```
+SELECT id, name, `order` FROM `tbl` WHERE id IN (1,2,'3') OR name IN ('george','ronald');
+```
+Custom example
+```
+var {ToStringOption, CaseType, LiteralQuoteType, SchemaQuoteType} = require('mysql-crud-parser');
+
+var option = new ToStringOption();
+option.case = CaseType.PASCAL;
+option.literalQuote = LiteralQuoteType.NON_NUMERIC;
+option.schemaQuote = SchemaQuoteType.RESERVED_WORD;
+option.selectExpressionSpacer = '';
+option.inClauseSpacer = '\t';
+crud.option = option;
+
+console.log(crud.toString());
+```
+__↓ ↓__
+```
+Select id,`name`,`order` From tbl Where id In (1,	2,	3) Or `name` In ('george',	'ronald');
 ```

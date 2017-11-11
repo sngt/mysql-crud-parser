@@ -24,3 +24,17 @@ console.log(source.toString());
 console.log('------------------------------');
 source.filePath = '_source_example.sql';
 console.log(source.expand());
+
+console.log('------------------------------');
+var crud = new Crud('SELECT id, name, `order` FROM `tbl` WHERE id IN (1,2,\'3\') OR name IN (\'george\', \'ronald\');');
+console.log(crud.toString());
+console.log('------------------------------');
+var {ToStringOption, CaseType, LiteralQuoteType, SchemaQuoteType} = require('../index.js');
+var option = new ToStringOption();
+option.case = CaseType.PASCAL;
+option.literalQuote = LiteralQuoteType.NON_NUMERIC;
+option.schemaQuote = SchemaQuoteType.RESERVED_WORD;
+option.selectExpressionSpacer = '';
+option.inClauseSpacer = '\t';
+crud.option = option;
+console.log(crud.toString());

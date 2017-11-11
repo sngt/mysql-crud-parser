@@ -25,13 +25,13 @@ fs.readFile('./test.sql', 'utf8', function (err, text) {
     crud.expandSource();
     assertEquals(18, crud.statements.length);
 
-    crud.statements.forEach((statement) => {
-        console.log(statement.toString());
-    });
+    // crud.statements.forEach((statement) => {
+    //     console.log(statement.toString());
+    // });
 });
 
 (() => {
-    const SQL = 'SELECT `val`, COUNT(1) FROM (SELECT COUNT(1) AS `val` FROM `tbl` WHERE `type` IN (1,2,3) GROUP BY `type`) `tmp` WHERE `id` IN (1,2,3,4);';
+    const SQL = 'SELECT `val`, COUNT(1) `c` FROM (SELECT COUNT(1) AS `val` FROM `tbl` WHERE `type` IN (1,2,3) GROUP BY `type`) `tmp` WHERE `id` IN (1,2,3,4) GROUP BY `val` HAVING `c` > 1;';
     const crud = new Crud(SQL);
     assertEquals(SQL, crud.statements.shift().toString());
 })();

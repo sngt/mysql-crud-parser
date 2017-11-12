@@ -186,7 +186,7 @@ The spacing character for align arguments of `IN` operator.
 
 Default
 ```
-var crud = new Crud('SELECT id, name, `order` FROM tbl WHERE id IN (1,2,3)');
+var crud = new Crud('SELECT id, name, `order` FROM `tbl` WHERE id IN (1,2,\'3\') OR name IN (\'george\', \'ronald\');');
 console.log(crud.toString());
 ```
 __↓ ↓__
@@ -203,8 +203,8 @@ option.literalQuote = LiteralQuoteType.NON_NUMERIC;
 option.schemaQuote = SchemaQuoteType.RESERVED_WORD;
 option.selectExpressionSpacer = '';
 option.inClauseSpacer = '\t';
-crud.option = option;
 
+crud.option = option;
 console.log(crud.toString());
 ```
 __↓ ↓__
